@@ -3,7 +3,15 @@ add_library(coroexample STATIC "")
 target_sources(
   coroexample
   PRIVATE
-  coroexample.cpp)
+  coroexample.cpp
+  coroexample_generalhelper.cpp
+  coroexample_helper.cpp
+  coroexample_task.cpp
+  coroexample_asyncscope.cpp
+  coroexample_syncwait.cpp
+  coroexample_manualeventloop.cpp
+  coroexample_lazytask.cpp
+  )
 
 include(GNUInstallDirs)
 
