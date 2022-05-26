@@ -1,11 +1,5 @@
 #include <coroexample/coroexample.h>
 
-#include <iostream>
-
-/////////////////////////////////////////////////
-// Example code
-
-#include <unistd.h>
 
 static task<int> f(int i) {
     using namespace std::chrono_literals;
