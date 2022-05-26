@@ -1,6 +1,5 @@
 #include <coroexample/coroexample.h>
 
-
 static task<int> f(int i) {
     using namespace std::chrono_literals;
     std::this_thread::sleep_for(1ms);

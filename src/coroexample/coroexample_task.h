@@ -32,7 +32,7 @@ struct task_promise {
     final_awaiter final_suspend() noexcept { return {}; }
 
     template <typename U>
-        requires std::convertible_to<U, T>
+    requires std::convertible_to<U, T>
     void
     return_value(U&& value) noexcept(std::is_nothrow_constructible_v<T, U>) {
         result.template emplace<1>(std::forward<U>(value));

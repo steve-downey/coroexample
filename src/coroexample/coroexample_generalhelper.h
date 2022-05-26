@@ -20,14 +20,15 @@ struct scope_guard {
     bool cancelled{false};
 
     template <typename F2>
-        requires std::constructible_from<F, F2>
+    requires std::constructible_from<F, F2>
     explicit scope_guard(F2&& f) noexcept(
         std::is_nothrow_constructible_v<F, F2>)
         : func(static_cast<F2>(f)) {}
 
-    scope_guard(scope_guard&& g) noexcept
-        requires std::is_nothrow_move_constructible_v<F>
-    : func(std::move(g.func)), cancelled(std::exchange(g.cancelled, true)) {}
+    scope_guard(scope_guard&& g) noexcept requires
+        std::is_nothrow_move_constructible_v<F>
+        : func(std::move(g.func)),
+          cancelled(std::exchange(g.cancelled, true)) {}
 
     ~scope_guard() { call_now(); }
 

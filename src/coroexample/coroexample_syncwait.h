@@ -8,13 +8,13 @@
 #include <coroutine>
 
 #include <coroexample/coroexample_generalhelper.h>
-#include<coroexample/coroexample_helper.h>
+#include <coroexample/coroexample_helper.h>
 
-    ////////////////////////////////////////////////////////////////
-    // sync_wait()
+////////////////////////////////////////////////////////////////
+// sync_wait()
 
-    template <typename Task>
-    await_result_t<Task> sync_wait(Task&& t) {
+template <typename Task>
+await_result_t<Task> sync_wait(Task&& t) {
     struct _void {};
     using return_type  = await_result_t<Task>;
     using storage_type = std::add_pointer_t<
@@ -52,9 +52,8 @@
             using non_void_return_type = std::
                 conditional_t<std::is_void_v<return_type>, _void, return_type>;
 
-            final_awaiter yield_value(non_void_return_type&& x)
-                requires(!std::is_void_v<return_type>)
-            {
+            final_awaiter yield_value(non_void_return_type&& x) requires(
+                !std::is_void_v<return_type>) {
                 // Note that we just store the address here and then suspend
                 // and unblock the waiting thread which then copies/moves the
                 // result from this address directly to the return-value of

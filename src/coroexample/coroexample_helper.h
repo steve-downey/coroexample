@@ -16,23 +16,19 @@
 // of those then it will also have the await_suspend() method.
 template <typename T>
 concept awaiter = requires(T& x) {
-                      (x.await_ready() ? (void)0 : (void)0);
-                      x.await_resume();
-                  };
+    (x.await_ready() ? (void)0 : (void)0);
+    x.await_resume();
+};
 
 template <typename T>
 concept _member_co_await = requires(T&& x) {
-                               {
-                                   static_cast<T&&>(x).operator co_await()
-                                   } -> awaiter;
-                           };
+    { static_cast<T&&>(x).operator co_await() } -> awaiter;
+};
 
 template <typename T>
 concept _free_co_await = requires(T&& x) {
-                             {
-                                 operator co_await(static_cast<T&&>(x))
-                                 } -> awaiter;
-                         };
+    { operator co_await(static_cast<T&&>(x)) } -> awaiter;
+};
 
 template <typename T>
 concept awaitable = _member_co_await<T> || _free_co_await<T> || awaiter<T>;
@@ -51,30 +47,31 @@ concept awaitable = _member_co_await<T> || _free_co_await<T> || awaiter<T>;
 // co_await()` even if the compiler's overload resolution would not consider
 // this to be ambiguous.
 template <typename T>
-    requires _member_co_await<T> decltype(auto)
-get_awaiter(T&& x) noexcept(
+requires _member_co_await<T>
+decltype(auto) get_awaiter(T&& x) noexcept(
     noexcept(static_cast<T&&>(x).operator co_await())) {
     return static_cast<T&&>(x).operator co_await();
 }
 
 template <typename T>
-    requires _free_co_await<T> decltype(auto)
+requires _free_co_await<T>
+decltype(auto)
 get_awaiter(T&& x) noexcept(operator co_await(static_cast<T&&>(x))) {
     return operator co_await(static_cast<T&&>(x));
 }
 
 template <typename T>
-    requires awaiter<T> && (!_free_co_await<T> && !_member_co_await<T>)
-T&& get_awaiter(T&& x) noexcept {
+requires awaiter<T> &&(!_free_co_await<T> &&
+                       !_member_co_await<T>)T&& get_awaiter(T&& x) noexcept {
     return static_cast<T&&>(x);
 }
 
 template <typename T>
-    requires awaitable<T>
+requires awaitable<T>
 using awaiter_type_t = decltype(get_awaiter(std::declval<T>()));
 
 template <typename T>
-    requires awaitable<T>
+requires awaitable<T>
 using await_result_t =
     decltype(std::declval<awaiter_type_t<T>&>().await_resume());
 
