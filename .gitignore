@@ -1,2 +1,5 @@
 .cmake.bld
 compile_commands.json
+.cache
+build
+hdoc-output
