@@ -59,7 +59,7 @@ get_awaiter(T&& x) noexcept(
 
 template <typename T>
     requires _free_co_await<T> decltype(auto)
-get_awaiter(T&& x) noexcept(operator co_await(static_cast<T&&>(x))) {
+    get_awaiter(T&& x) noexcept(operator co_await(static_cast<T&&>(std::declval<T>()))) {
     return operator co_await(static_cast<T&&>(x));
 }
 
