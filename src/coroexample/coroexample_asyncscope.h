@@ -101,7 +101,7 @@ struct async_scope {
 
   public:
     template <typename A>
-        requires decay_copyable<A> && awaitable<std::decay_t<A>>
+    requires decay_copyable<A> && awaitable<std::decay_t<A>>
     void spawn_detached(A&& a) {
         spawn_detached_impl(std::forward<A>(a));
     }

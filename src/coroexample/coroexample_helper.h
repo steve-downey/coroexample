@@ -51,30 +51,31 @@ concept awaitable = _member_co_await<T> || _free_co_await<T> || awaiter<T>;
 // co_await()` even if the compiler's overload resolution would not consider
 // this to be ambiguous.
 template <typename T>
-    requires _member_co_await<T> decltype(auto)
+requires _member_co_await<T> decltype(auto)
 get_awaiter(T&& x) noexcept(
     noexcept(static_cast<T&&>(x).operator co_await())) {
     return static_cast<T&&>(x).operator co_await();
 }
 
 template <typename T>
-    requires _free_co_await<T> decltype(auto)
-    get_awaiter(T&& x) noexcept(operator co_await(static_cast<T&&>(std::declval<T>()))) {
+requires _free_co_await<T> decltype(auto)
+get_awaiter(
+    T&& x) noexcept(operator co_await(static_cast<T&&>(std::declval<T>()))) {
     return operator co_await(static_cast<T&&>(x));
 }
 
 template <typename T>
-    requires awaiter<T> && (!_free_co_await<T> && !_member_co_await<T>)
+requires awaiter<T> && (!_free_co_await<T> && !_member_co_await<T>)
 T&& get_awaiter(T&& x) noexcept {
     return static_cast<T&&>(x);
 }
 
 template <typename T>
-    requires awaitable<T>
+requires awaitable<T>
 using awaiter_type_t = decltype(get_awaiter(std::declval<T>()));
 
 template <typename T>
-    requires awaitable<T>
+requires awaitable<T>
 using await_result_t =
     decltype(std::declval<awaiter_type_t<T>&>().await_resume());
 

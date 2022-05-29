@@ -53,7 +53,7 @@ await_result_t<Task> sync_wait(Task&& t) {
                 conditional_t<std::is_void_v<return_type>, _void, return_type>;
 
             final_awaiter yield_value(non_void_return_type&& x)
-                requires(!std::is_void_v<return_type>)
+            requires(!std::is_void_v<return_type>)
             {
                 // Note that we just store the address here and then suspend
                 // and unblock the waiting thread which then copies/moves the
