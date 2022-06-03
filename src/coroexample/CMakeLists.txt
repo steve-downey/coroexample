@@ -4,13 +4,13 @@ target_sources(
   coroexample
   PRIVATE
   coroexample.cpp
-  coroexample_generalhelper.cpp
-  coroexample_helper.cpp
-  coroexample_task.cpp
-  coroexample_asyncscope.cpp
-  coroexample_syncwait.cpp
-  coroexample_manualeventloop.cpp
-  coroexample_lazytask.cpp
+  generalhelper.cpp
+  helper.cpp
+  task.cpp
+  asyncscope.cpp
+  syncwait.cpp
+  manualeventloop.cpp
+  lazytask.cpp
   )
 
 include(GNUInstallDirs)

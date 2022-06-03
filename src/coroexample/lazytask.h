@@ -4,7 +4,7 @@
 
 #include <thread>
 
-#include <coroexample/coroexample_helper.h>
+#include <coroexample/helper.h>
 
 ////////////////////////////////////////////////
 // Helper for improving allocation elision for composed operations.

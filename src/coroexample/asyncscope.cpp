@@ -1,2 +1,2 @@
 // coroexample_asyncscope.cpp                                         -*-C++-*-
-#include <coroexample/coroexample_asyncscope.h>
+#include <coroexample/asyncscope.h>

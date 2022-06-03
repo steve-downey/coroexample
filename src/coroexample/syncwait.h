@@ -7,8 +7,8 @@
 #include <semaphore>
 #include <coroutine>
 
-#include <coroexample/coroexample_generalhelper.h>
-#include <coroexample/coroexample_helper.h>
+#include <coroexample/generalhelper.h>
+#include <coroexample/helper.h>
 
 ////////////////////////////////////////////////////////////////
 // sync_wait()

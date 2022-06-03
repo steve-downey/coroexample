@@ -94,10 +94,10 @@
 // By Lewis Baker <lewissbaker@gmail.com>
 /////////////////////////////////////////////////////////////////////////
 
-#include <coroexample/coroexample_generalhelper.h>
-#include <coroexample/coroexample_helper.h>
-#include <coroexample/coroexample_task.h>
-#include <coroexample/coroexample_asyncscope.h>
-#include <coroexample/coroexample_syncwait.h>
-#include <coroexample/coroexample_manualeventloop.h>
-#include <coroexample/coroexample_lazytask.h>
+#include <coroexample/generalhelper.h>
+#include <coroexample/helper.h>
+#include <coroexample/task.h>
+#include <coroexample/asyncscope.h>
+#include <coroexample/syncwait.h>
+#include <coroexample/manualeventloop.h>
+#include <coroexample/lazytask.h>

@@ -1,2 +1,2 @@
 // coroexample_lazytask.cpp                                           -*-C++-*-
-#include <coroexample/coroexample_lazytask.h>
+#include <coroexample/lazytask.h>
