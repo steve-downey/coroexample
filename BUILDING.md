@@ -15,6 +15,6 @@ This currently uses the toolchain file in etc/ that specifies clang-14 with libs
 
 The Makefile is also executable, and the repository can be built via
 ```sh
-./build
+./compile
 ```
 `
